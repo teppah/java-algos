@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class InsertionSort {
+public class SelectionSort {
     public static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int smallestIndex = findSmallestIndex(Arrays.copyOfRange(array, i, array.length));
