@@ -10,6 +10,7 @@ public class Main {
         testSelectionSort();
         testQuicksort();
         testMergesort();
+        testBinarySearch();
     }
 
     public static void testSelectionSort() {
@@ -34,5 +35,16 @@ public class Main {
                 .collect(Collectors.toCollection(ArrayList::new));
         List<Integer> sorted = Mergesort.sort(toSort);
         System.out.println("Mergesort:\n" + sorted);
+    }
+
+    public static void testBinarySearch() {
+        List<Integer> toSort = Arrays
+                .stream(intArray)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+        int[] sorted = Quicksort.sort(toSort).stream().mapToInt(i -> i).toArray();
+        int key = 345;
+        int index = BinarySearch.search(sorted, key);
+        System.out.printf("Index of 345 with binary search: %d\n", index);
     }
 }
