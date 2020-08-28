@@ -21,7 +21,8 @@ public class Quicksort {
         List<Integer> sortedSmaller = sort(smaller);
         List<Integer> sortedBigger = sort(bigger);
 
-        List<Integer> result = new ArrayList<>(sortedSmaller);
+        List<Integer> result = new ArrayList<>(sortedSmaller.size() + sortedBigger.size() + 1);
+        result.addAll(sortedSmaller);
         result.add(middle);
         result.addAll(sortedBigger);
         return result;
