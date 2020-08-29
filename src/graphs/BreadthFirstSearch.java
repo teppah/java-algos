@@ -2,6 +2,8 @@ package graphs;
 
 import java.util.*;
 
+import static utils.GraphUtils.backtrace;
+
 public class BreadthFirstSearch {
     public static List<String> search(Map<String, Set<String>> graph, String origin, String target) {
         Map<String, String> parents = new HashMap<>();
@@ -24,13 +26,4 @@ public class BreadthFirstSearch {
         return List.of();
     }
 
-    private static List<String> backtrace(Map<String, String> parents, String target) {
-        Deque<String> path = new ArrayDeque<>();
-        path.add(target);
-        String next = target;
-        while ((next = parents.get(next)) != null) {
-            path.addFirst(next);
-        }
-        return List.copyOf(path);
-    }
 }

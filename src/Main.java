@@ -1,4 +1,6 @@
 import graphs.BreadthFirstSearch;
+import graphs.Dijkstra;
+import graphs.Dijkstra.Edge;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,6 +15,7 @@ public class Main {
         testMergesort();
         testBinarySearch();
         testBfs();
+        testDijkstra();
     }
 
     public static void testSelectionSort() {
@@ -69,6 +72,17 @@ public class Main {
 
         List<String> path = BreadthFirstSearch.search(graph, "bob", "claire");
         System.out.println("BFS path:\n" + path);
+    }
 
+    public static void testDijkstra() {
+        Map<String, Set<Edge>> graph = new HashMap<>();
+        graph.put("book", Set.of(new Edge("lp", 5), new Edge("poster", 0)));
+        graph.put("lp", Set.of(new Edge("bass", 15), new Edge("drum", 20)));
+        graph.put("poster", Set.of(new Edge("bass", 30), new Edge("drum", 35)));
+        graph.put("bass", Set.of(new Edge("piano", 20)));
+        graph.put("drum", Set.of(new Edge("piano", 10)));
+
+        int shortestCost = Dijkstra.findShortestPath(graph, "book", "piano");
+        System.out.println("Shortest cost:" + shortestCost);
     }
 }

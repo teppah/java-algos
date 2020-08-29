@@ -6,5 +6,4 @@ public class ArrayUtils {
         array[first] = array[second];
         array[second] = temp;
     }
-
 }
