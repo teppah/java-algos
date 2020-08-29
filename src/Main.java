@@ -8,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         testSelectionSort();
+        testInsertionSort();
         testQuicksort();
         testMergesort();
         testBinarySearch();
@@ -46,5 +47,11 @@ public class Main {
         int key = 345;
         int index = BinarySearch.search(sorted, key);
         System.out.printf("Index of 345 with binary search: %d\n", index);
+    }
+
+    public static void testInsertionSort() {
+        int[] toSort = Arrays.copyOf(intArray, intArray.length);
+        InsertionSort.sort(toSort);
+        System.out.println("Insertion Sort:\n" + Arrays.toString(toSort));
     }
 }

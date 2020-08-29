@@ -1,5 +1,7 @@
 import java.util.Arrays;
 
+import static utils.ArrayUtils.swap;
+
 public class SelectionSort {
     public static void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
@@ -22,11 +24,5 @@ public class SelectionSort {
             }
         }
         return index;
-    }
-
-    private static void swap(int[] array, int first, int second) {
-        int temp = array[first];
-        array[first] = array[second];
-        array[second] = temp;
     }
 }
