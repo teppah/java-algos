@@ -82,7 +82,7 @@ public class Main {
         graph.put("bass", Set.of(new Edge("piano", 20)));
         graph.put("drum", Set.of(new Edge("piano", 10)));
 
-        int shortestCost = Dijkstra.findShortestPath(graph, "book", "piano");
-        System.out.println("Shortest cost:" + shortestCost);
+        Dijkstra.Result result = Dijkstra.findShortestPath(graph, "book", "piano");
+        System.out.printf("Dijkstra path:\n%s\nCost:%d", result.getPath(),result.getCost());
     }
 }

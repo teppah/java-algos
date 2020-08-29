@@ -23,6 +23,24 @@ public class Dijkstra {
         }
     }
 
+    public static class Result {
+        private int cost;
+        private List<String> path;
+
+        public int getCost() {
+            return cost;
+        }
+
+        public List<String> getPath() {
+            return path;
+        }
+
+        public Result(int cost, List<String> path) {
+            this.cost = cost;
+            this.path = path;
+        }
+    }
+
     private static class PathState {
         String nodeName;
         // encodes the path that was taken to arrive to this node
@@ -42,7 +60,7 @@ public class Dijkstra {
         }
     }
 
-    public static int findShortestPath(Map<String, Set<Edge>> graph, String origin, String target) {
+    public static Result findShortestPath(Map<String, Set<Edge>> graph, String origin, String target) {
         Map<String, String> parents = new HashMap<>();
         Map<String, Integer> costs = new HashMap<>();
 
@@ -50,16 +68,15 @@ public class Dijkstra {
         toVisit.add(new PathState(origin, 0));
         costs.put(origin, 0);
 
-        PathState next;
-        while ((next = toVisit.poll()) != null) {
-            String currentNodeName = next.nodeName;
+        PathState toSearch;
+        while ((toSearch = toVisit.poll()) != null) {
+            String currentNodeName = toSearch.nodeName;
             if (currentNodeName.equals(target)) {
                 List<String> path = backtrace(parents, target);
-                System.out.println(path);
-                return next.costToNode;
+                return new Result(toSearch.costToNode,path);
             }
             // a better PathState might already have been processed due to PrioQue, skip
-            if (next.costToNode > costs.get(currentNodeName)) {
+            if (toSearch.costToNode > costs.get(currentNodeName)) {
                 continue;
             }
             // process all edges
@@ -67,15 +84,15 @@ public class Dijkstra {
                 // (current lowest) cost to get to next node, defaults to infinity
                 int currentCost = costs.getOrDefault(edge.nodeName, Integer.MAX_VALUE);
                 // tentative cost to get to next node from current node (might be lower)
-                int tentativeCost = next.costToNode + edge.distance;
+                int tentativeCost = toSearch.costToNode + edge.distance;
                 if (tentativeCost < currentCost) {
                     // update cost and parent, add it as a next PathState with the new shorter cost
                     costs.put(edge.nodeName, tentativeCost);
-                    parents.put(edge.nodeName, next.nodeName);
+                    parents.put(edge.nodeName, toSearch.nodeName);
                     toVisit.add(new PathState(edge.nodeName, tentativeCost));
                 }
             }
         }
-        return -1;
+        return new Result(-1, List.of());
     }
 }
