@@ -1,6 +1,6 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import graphs.BreadthFirstSearch;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -12,6 +12,7 @@ public class Main {
         testQuicksort();
         testMergesort();
         testBinarySearch();
+        testBfs();
     }
 
     public static void testSelectionSort() {
@@ -53,5 +54,21 @@ public class Main {
         int[] toSort = Arrays.copyOf(intArray, intArray.length);
         InsertionSort.sort(toSort);
         System.out.println("Insertion Sort:\n" + Arrays.toString(toSort));
+    }
+
+    public static void testBfs() {
+        Map<String, Set<String>> graph = new HashMap<>();
+        graph.put("you", Set.of("bob", "claire", "alice"));
+        graph.put("bob", Set.of("anuj", "peggy"));
+        graph.put("alice", Set.of("you"));
+        graph.put("claire", Set.of("peggy"));
+        graph.put("anuj", Set.of("jonny"));
+        graph.put("peggy", Set.of("thom"));
+        graph.put("thom", Set.of("anuj"));
+        graph.put("jonny", Set.of("alice"));
+
+        List<String> path = BreadthFirstSearch.search(graph, "bob", "claire");
+        System.out.println("BFS path:\n" + path);
+
     }
 }
